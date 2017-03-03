@@ -1,0 +1,19 @@
+{
+  "name": "vanilla_shadermaterial_examples",
+  "version": "1.0.0",
+  "description": "Simple examples of different ShaderMaterial GLSL shaders in Three.js",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Chris \"2pha\" Brown",
+  "license": "MIT",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-concat": "^2.6.1",
+    "gulp-htmlclean": "^2.7.9",
+    "gulp-minify-inline": "^0.2.1",
+    "gulp-rename": "^1.2.2",
+    "gulp-uglify": "^2.0.1"
+  }
+}

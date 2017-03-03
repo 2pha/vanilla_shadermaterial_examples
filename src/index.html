@@ -2,12 +2,20 @@
 <html>
 <head>
   <title>Three.js ShaderMaterial Examples</title>
-  <meta name="description" content="">
+  <meta name="description" content="Simple examples of different ShaderMaterial GLSL shaders in Three.js">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+
   <style>
   body {
     background-color: #000;
     color: #fff;
+    margin: 0px;
+  }
+  #preloader-container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: #000;
   }
   #preloader {
     position: absolute;
@@ -19,13 +27,13 @@
     width: 100px;
     height: 100px;
   }
-  
+
   #preloader .text {
     color: #fff;
     text-align: center;
   }
-  
-  
+
+
 .sk-folding-cube {
   margin: 20px auto;
   width: 40px;
@@ -42,7 +50,7 @@
   position: relative;
   -webkit-transform: scale(1.1);
       -ms-transform: scale(1.1);
-          transform: scale(1.1); 
+          transform: scale(1.1);
 }
 .sk-folding-cube .sk-cube:before {
   content: '';
@@ -76,7 +84,7 @@
 }
 .sk-folding-cube .sk-cube3:before {
   -webkit-animation-delay: 0.6s;
-          animation-delay: 0.6s; 
+          animation-delay: 0.6s;
 }
 .sk-folding-cube .sk-cube4:before {
   -webkit-animation-delay: 0.9s;
@@ -86,46 +94,73 @@
   0%, 10% {
     -webkit-transform: perspective(140px) rotateX(-180deg);
             transform: perspective(140px) rotateX(-180deg);
-    opacity: 0; 
+    opacity: 0;
   } 25%, 75% {
     -webkit-transform: perspective(140px) rotateX(0deg);
             transform: perspective(140px) rotateX(0deg);
-    opacity: 1; 
+    opacity: 1;
   } 90%, 100% {
     -webkit-transform: perspective(140px) rotateY(180deg);
             transform: perspective(140px) rotateY(180deg);
-    opacity: 0; 
-  } 
+    opacity: 0;
+  }
 }
 
 @keyframes sk-foldCubeAngle {
   0%, 10% {
     -webkit-transform: perspective(140px) rotateX(-180deg);
             transform: perspective(140px) rotateX(-180deg);
-    opacity: 0; 
+    opacity: 0;
   } 25%, 75% {
     -webkit-transform: perspective(140px) rotateX(0deg);
             transform: perspective(140px) rotateX(0deg);
-    opacity: 1; 
+    opacity: 1;
   } 90%, 100% {
     -webkit-transform: perspective(140px) rotateY(180deg);
             transform: perspective(140px) rotateY(180deg);
-    opacity: 0; 
+    opacity: 0;
   }
 }
+  
+  #app-container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: #000000;
+    overflow: hidden;
+  }
+  #canvas-container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+  }
 
   </style>
 </head>
 <body>
-  <div id="preloader">
-    <div class="sk-folding-cube">
-      <div class="sk-cube1 sk-cube"></div>
-      <div class="sk-cube2 sk-cube"></div>
-      <div class="sk-cube4 sk-cube"></div>
-      <div class="sk-cube3 sk-cube"></div>
-    </div>
-    <div class="text">Loading</div>
-    
+
+  <div id="app-container">
+    <div id="canvas-container"></div>
   </div>
+  
+  <div id="preloader-container">
+    <div id="preloader">
+      <div class="sk-folding-cube">
+        <div class="sk-cube1 sk-cube"></div>
+        <div class="sk-cube2 sk-cube"></div>
+        <div class="sk-cube4 sk-cube"></div>
+        <div class="sk-cube3 sk-cube"></div>
+      </div>
+      <div class="text">Loading Three.js Shader examples</div>
+    </div>
+  </div>
+
+  <script src="script.js" async></script>
+  <script>
+  window.onload = function(){
+    App.init();
+  }
+  </script>
+
 </body>
 </html>
