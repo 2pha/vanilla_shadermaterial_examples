@@ -7,7 +7,11 @@ var htmlclean = require('gulp-htmlclean');
 var sass = require('gulp-sass');
 
 //script paths
-var jsFiles = ['src/js/three.js', 'src/js/app.js', 'src/js/shaders/*.js'],
+var jsFiles = ['src/js/three.js',
+               'src/js/Router.js',
+               'src/js/app.js',
+               'src/js/shapes/*.js',
+               'src/js/shaders/*.js'],
     jsDest = 'build';
 
 var sassFile = 'src/sass/styles.scss',

@@ -1,10 +1,15 @@
 var App = {
   shaders : [],
+  shapes : [],
   preloadContainer : document.getElementById('preloader-container'),
   canvasContainer : document.getElementById('canvas-container'),
   init : function(){
     // Hide preloader.
     this.preloadContainer.style.display = 'none';
+    // Add routes
+    this.addRoutes();
+    // Add buttons.
+    this.addButtons();
     // setup canvas
     this.createCanvas();
     
@@ -12,6 +17,14 @@ var App = {
     window.addEventListener('resize', this.onWindowResize.bind(this), false);
     
     this.animate();
+  },
+  
+  addRoutes : function(){
+    
+  },
+  
+  addButtons : function(){
+    
   },
   
   createCanvas : function(){
@@ -44,15 +57,18 @@ var App = {
     directionalLight.position.set(1, 1, 1).normalize();
     this.scene.add(directionalLight);
   },
+  
   animate: function(){
     requestAnimationFrame(this.animate.bind(this));
     this.mesh.rotation.x += 0.005;
     this.mesh.rotation.y += 0.01;
     this.renderer.render(this.scene, this.camera);
   },
+  
   render: function(){
     this.renderer.render(this.scene, this.camera);
   },
+  
   onWindowResize: function(){
     var size = this.canvasContainer.getBoundingClientRect();
     this.camera.aspect = size.width / size.height;
