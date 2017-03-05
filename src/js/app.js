@@ -3,28 +3,58 @@ var App = {
   shapes : [],
   preloadContainer : document.getElementById('preloader-container'),
   canvasContainer : document.getElementById('canvas-container'),
+  toolsContainer : document.getElementById('tools-container'),
+  scene: null,
+  renderer: null,
+  camera: null,
+  mesh: null,
   init : function(){
+    // Config router.
+    //Router.config({mode:'history', root: window.location.pathname});
+    Router.config();
     // Hide preloader.
     this.preloadContainer.style.display = 'none';
-    // Add routes
-    this.addRoutes();
     // Add buttons.
-    this.addButtons();
+    this.addGeoButtons();
+    // Add shader select and routes.
+    this.addShaderCombobox();
     // setup canvas
     this.createCanvas();
     
- // Add listener for window resize.
+    // Add listener for window resize.
     window.addEventListener('resize', this.onWindowResize.bind(this), false);
     
     this.animate();
   },
   
-  addRoutes : function(){
+  addGeoButtons : function(){
     
   },
   
-  addButtons : function(){
+  addShaderCombobox : function(){
+    var shaderSelect = document.createElement("select");
+    shaderSelect.id = 'shader-select';
+    var app = this
+    App.shaders.forEach(function(shader, index){
+      
+      var option = document.createElement("option");
+      option.value = index;
+      option.innerHTML = shader.name;
+      shaderSelect.appendChild(option);
+      Router.add(shader.path, function(){app.setShader(index)});
+      
+      //if(index == 0){
+      //  Router.frontFunc = app.changeShader(index);
+      //}
+      
+    });
     
+    shaderSelect.addEventListener('change', function(e){
+      Router.navigate(App.shaders[shaderSelect.value].path);
+    });
+    
+    this.toolsContainer.appendChild(shaderSelect);
+    Router.check().listen();
   },
   
   createCanvas : function(){
@@ -41,7 +71,7 @@ var App = {
     
     this.scene = new THREE.Scene();
     
-    this.material = new THREE.MeshBasicMaterial();
+    //this.material = new THREE.MeshBasicMaterial();
     
  // Create cube and add to scene.
     var geometry = new THREE.BoxGeometry(200, 200, 200);
@@ -67,6 +97,29 @@ var App = {
   
   render: function(){
     this.renderer.render(this.scene, this.camera);
+  },
+  
+  setShader: function(index){
+    // Make sure the correct select option is selected.
+    var selectElement = document.getElementById('shader-select');
+    selectElement.options.selectedIndex = index;
+    
+    var shaderObject = {
+      vertexShader: App.shaders[index].vertexShader,
+      fragmentShader: App.shaders[index].fragmentShader,
+    }
+    if('uniforms' in App.shaders[index]){
+      shaderObject.uniforms = App.shaders[index].uniforms;
+    }
+    
+    this.material= new THREE.ShaderMaterial(shaderObject);
+    if(this.mesh != null){
+      this.mesh.material = this.material;
+    }
+    
+    console.log('change shader');
+    console.log(index);
+    console.log(App.shaders[index].name);
   },
   
   onWindowResize: function(){

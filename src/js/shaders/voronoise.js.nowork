@@ -1,6 +1,7 @@
 App.shaders.push(
   {
     name: "Voronoise",
+    path: "!voronoise",
     uniforms: {
       "amount": {
         type: "f",

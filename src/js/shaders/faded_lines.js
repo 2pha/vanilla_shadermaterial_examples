@@ -1,6 +1,7 @@
 App.shaders.push(
   {
     name: "Faded lines",
+    path: "!faded-lines",
     uniforms: {
       "color1" : {
         type : "c",

@@ -1,6 +1,7 @@
 App.shaders.push(
   {
     name: "Normal",
+    path: "!normal",
     uniforms: {},
     vertexShader: "\
 varying vec3 transformedNormal;\

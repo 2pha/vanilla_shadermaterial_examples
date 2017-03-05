@@ -2,6 +2,7 @@ var Router = {
     routes: [],
     mode: null,
     root: '/',
+    //frontFunc: null,
     config: function(options) {
       this.mode = options && options.mode && options.mode == 'history' 
         && !!(history.pushState) ? 'history' : 'hash';
@@ -48,6 +49,9 @@ var Router = {
     },
     check: function(f) {
       var fragment = f || this.getFragment();
+      //if(fragment == '' && typeof this.frontFunc == 'function') {
+      //  this.frontFunc();
+      //}
       for(var i=0; i<this.routes.length; i++) {
         var match = fragment.match(this.routes[i].re);
         if(match) {

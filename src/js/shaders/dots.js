@@ -1,6 +1,7 @@
 App.shaders.push(
   {
     name: "Dots",
+    path: "!dots",
     uniforms: {
       "color1" : {
         type : "c",

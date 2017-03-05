@@ -1,6 +1,7 @@
 App.shaders.push(
   {
     name: "Checker",
+    path: "!checker",
     uniforms: {
       "color1": {
         type: "c",

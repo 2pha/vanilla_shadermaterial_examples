@@ -1,6 +1,7 @@
 App.shaders.push(
   {
-    name: "Basic Color",
+    name: "Basic color",
+    path : '!basic-color',
     uniforms: {
       diffuse: { type: "c", value: new THREE.Color(0xff0000) }
     },

@@ -1,6 +1,7 @@
 App.shaders.push(
   {
     name: "Simple lines",
+    path: "!simple-lines",
     uniforms: {
       color1 : { type : "c", value : new THREE.Color(0xffffff)},
       alpha1: { type: "f", value: 1.0, min: 0.0, max: 1.0},
