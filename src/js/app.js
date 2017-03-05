@@ -9,6 +9,7 @@ var App = {
   camera: null,
   mesh: null,
   stats: new Stats(),
+  clock: new THREE.Clock(1),
   init : function(){
     // Config router.
     //Router.config({mode:'history', root: window.location.pathname});
