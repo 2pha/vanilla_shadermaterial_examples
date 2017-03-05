@@ -7,7 +7,17 @@ var App = {
   scene: null,
   renderer: null,
   camera: null,
+  //material: null,
   mesh: null,
+  
+  _shaderIndex: 0,
+  get shaderIndex() {
+    return this._shaderIndex;
+  },
+  set shaderIndex(value) {
+    this._shaderIndex = value;
+    this.setShader(this._shaderIndex);
+  },
   stats: new Stats(),
   clock: new THREE.Clock(1),
   init : function(){
@@ -41,14 +51,14 @@ var App = {
   addShaderCombobox : function(){
     var shaderSelect = document.createElement("select");
     shaderSelect.id = 'shader-select';
-    var app = this
+    //var app = this
     App.shaders.forEach(function(shader, index){
       
       var option = document.createElement("option");
       option.value = index;
       option.innerHTML = shader.name;
       shaderSelect.appendChild(option);
-      Router.add(shader.path, function(){app.setShader(index)});
+      Router.add(shader.path, function(){App.shaderIndex = index});
       
       //if(index == 0){
       //  Router.frontFunc = app.changeShader(index);
@@ -99,8 +109,11 @@ var App = {
     this.stats.begin();
     this.mesh.rotation.x += 0.005;
     this.mesh.rotation.y += 0.01;
-    this.renderer.render(this.scene, this.camera);
+    this.render();
     this.stats.end();
+    if('material' in this && 'update' in this.shaders[this.shaderIndex]){
+      this.shaders[this.shaderIndex].update();
+    }
     requestAnimationFrame(this.animate.bind(this));
   },
   
