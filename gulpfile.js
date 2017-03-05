@@ -8,6 +8,7 @@ var sass = require('gulp-sass');
 
 //script paths
 var jsFiles = ['src/js/three.js',
+               'src/js/stats.js',
                'src/js/Router.js',
                'src/js/app.js',
                'src/js/shapes/*.js',

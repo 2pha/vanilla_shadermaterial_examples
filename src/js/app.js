@@ -8,6 +8,7 @@ var App = {
   renderer: null,
   camera: null,
   mesh: null,
+  stats: new Stats(),
   init : function(){
     // Config router.
     //Router.config({mode:'history', root: window.location.pathname});
@@ -20,6 +21,11 @@ var App = {
     this.addShaderCombobox();
     // setup canvas
     this.createCanvas();
+    
+    
+    // add stats
+    document.getElementById('stats-container').appendChild( this.stats.dom );
+    
     
     // Add listener for window resize.
     window.addEventListener('resize', this.onWindowResize.bind(this), false);
@@ -89,10 +95,12 @@ var App = {
   },
   
   animate: function(){
-    requestAnimationFrame(this.animate.bind(this));
+    this.stats.begin();
     this.mesh.rotation.x += 0.005;
     this.mesh.rotation.y += 0.01;
     this.renderer.render(this.scene, this.camera);
+    this.stats.end();
+    requestAnimationFrame(this.animate.bind(this));
   },
   
   render: function(){
@@ -116,10 +124,6 @@ var App = {
     if(this.mesh != null){
       this.mesh.material = this.material;
     }
-    
-    console.log('change shader');
-    console.log(index);
-    console.log(App.shaders[index].name);
   },
   
   onWindowResize: function(){
