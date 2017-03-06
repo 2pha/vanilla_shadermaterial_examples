@@ -8,6 +8,9 @@ var App = {
   scene: null,
   renderer: null,
   camera: null,
+  
+  light1 : new THREE.PointLight(0xff0000),
+  light2 : new THREE.PointLight(0x00ff00),
   //material: null,
   mesh: null,
   
@@ -123,17 +126,35 @@ var App = {
     var directionalLight = new THREE.DirectionalLight(0xffffff);
     directionalLight.position.set(1, 1, 1).normalize();
     this.scene.add(directionalLight);
+    
+    // Add rotating lights
+    this.light1.addSphere();
+    this.light1.position.set( 250, 0, 0 );
+    this.scene.add(this.light1);
+    
+    this.light2.addSphere();
+    this.light2.position.set( 0,250, 0 );
+    this.scene.add(this.light2);
+    
   },
   
   animate: function(){
     this.stats.begin();
+    // roatae lights
+    var timer = this.clock.getElapsedTime() * 0.5;
+    this.light1.position.x = Math.cos( timer ) * 250;
+    this.light1.position.z = Math.sin( timer ) * 250;
+    this.light2.position.y = Math.cos( timer * 1.25 ) * 250;
+    this.light2.position.z = Math.sin( timer * 1.25 ) * 250;
+    // rotate mesh
     this.mesh.rotation.x += 0.005;
     this.mesh.rotation.y += 0.01;
-    this.render();
-    this.stats.end();
+    
     if('material' in this && 'update' in this.shaders[this.shaderIndex]){
       this.shaders[this.shaderIndex].update();
     }
+    this.render();
+    this.stats.end();
     requestAnimationFrame(this.animate.bind(this));
   },
   
@@ -175,3 +196,16 @@ var App = {
     this.render();
   }
 };
+
+
+
+
+//Add to PointLight pprototype so we can see where lights are and their color.
+THREE.PointLight.prototype.addSphere = function(){
+  this.sphere = new THREE.Mesh( new THREE.SphereGeometry( 2, 16, 16 ), new THREE.MeshBasicMaterial( { color: this.color } ) ) 
+  this.add(this.sphere);
+}
+THREE.PointLight.prototype.changeColor = function(value){
+  this.color.setRGB(value[0]/255, value[1]/255, value[2]/255);
+  this.sphere.material.color.setRGB(value[0]/255, value[1]/255, value[2]/255);
+}
