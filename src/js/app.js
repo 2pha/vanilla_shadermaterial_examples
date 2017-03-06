@@ -54,8 +54,9 @@ var App = {
       var button = document.createElement("div");
       button.className += 'geobutton';
       button.id += 'goebutton-'+shape.name.toLowerCase();;
-      button.innerHTML = shape.name;
+      button.title = shape.name;
       button.addEventListener('click', function(){App.setGeometry(index);});
+      button.style.backgroundImage = 'url(images/'+shape.buttonImage+')';
       geoButtonContainer.appendChild(button);
       
     });
@@ -156,7 +157,6 @@ var App = {
   
   setGeometry: function(index){
     if(this.mesh.geometry != App.shapes[index].geo){
-      console.log('change');
       this.mesh.geometry = App.shapes[index].geo;
     }
     

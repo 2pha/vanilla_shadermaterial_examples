@@ -34,6 +34,7 @@ $button-size: 50px;
 
 .geobutton {
   background-color: $secondary-color;
+  background-size: cover;
   width: $button-size;
   height: $button-size;
 }
