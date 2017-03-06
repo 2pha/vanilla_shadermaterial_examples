@@ -45,7 +45,18 @@ var App = {
   },
   
   addGeoButtons : function(){
-    
+    var geoButtonContainer = document.createElement("div");
+    geoButtonContainer.id = 'geo-button-container';
+    this.shapes.forEach(function(shape, index){
+      var button = document.createElement("div");
+      button.className += 'geobutton';
+      button.id += 'goebutton-'+shape.name.toLowerCase();;
+      button.innerHTML = shape.name;
+      button.addEventListener('click', function(){App.setGeometry(index);});
+      geoButtonContainer.appendChild(button);
+      
+    });
+    this.toolsContainer.appendChild(geoButtonContainer);
   },
   
   addShaderCombobox : function(){
@@ -91,8 +102,8 @@ var App = {
     //this.material = new THREE.MeshBasicMaterial();
     
  // Create cube and add to scene.
-    var geometry = new THREE.BoxGeometry(200, 200, 200);
-    this.mesh = new THREE.Mesh(geometry, this.material);
+    //var geometry = new THREE.BoxGeometry(200, 200, 200);
+    this.mesh = new THREE.Mesh(this.shapes[0].geo, this.material);
     this.scene.add(this.mesh);
     
  // Create ambient light and add to scene.
@@ -138,6 +149,10 @@ var App = {
     if(this.mesh != null){
       this.mesh.material = this.material;
     }
+  },
+  
+  setGeometry: function(index){
+    this.mesh.geometry = App.shapes[index].geo;
   },
   
   onWindowResize: function(){

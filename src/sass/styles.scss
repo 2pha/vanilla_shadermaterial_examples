@@ -1,5 +1,8 @@
-$primary-color: #ccc;
-$secondary-color: #fff;
+$primary-color: #000;
+$secondary-color: #777;
+$hover-color: #a5a5a5;
+
+$button-size: 50px;
 
 #canvas-container {
   background-color: $primary-color;
@@ -13,4 +16,14 @@ $secondary-color: #fff;
   position: absolute;
   right: 0px;
   bottom: 0px;
+}
+
+.geobutton {
+  background-color: $secondary-color;
+  width: $button-size;
+  height: $button-size;
+}
+.geobutton:hover {
+  background-color: $hover-color;
+  cursor: pointer;
 }
