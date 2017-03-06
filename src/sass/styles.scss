@@ -4,11 +4,25 @@ $hover-color: #a5a5a5;
 
 $button-size: 50px;
 
+#app-container {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: #000000;
+  overflow: hidden;
+}
+
 #canvas-container {
   background-color: $primary-color;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0px;
 }
 
 #tools-container {
+  position: absolute;
+  top: 0px;
   width: 100%;
 }
 
@@ -27,3 +41,4 @@ $button-size: 50px;
   background-color: $hover-color;
   cursor: pointer;
 }
+

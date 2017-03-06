@@ -1,6 +1,7 @@
 var App = {
   shaders : [],
   shapes : [],
+  appContainer: document.getElementById('app-container'),
   preloadContainer : document.getElementById('preloader-container'),
   canvasContainer : document.getElementById('canvas-container'),
   toolsContainer : document.getElementById('tools-container'),
@@ -24,8 +25,7 @@ var App = {
     // Config router.
     //Router.config({mode:'history', root: window.location.pathname});
     Router.config();
-    // Hide preloader.
-    this.preloadContainer.style.display = 'none';
+    
     // Add buttons.
     this.addGeoButtons();
     // Add shader select and routes.
@@ -40,6 +40,9 @@ var App = {
     
     // Add listener for window resize.
     window.addEventListener('resize', this.onWindowResize.bind(this), false);
+    
+    // Hide preloader.
+    this.preloadContainer.style.display = 'none';
     
     this.animate();
   },
@@ -152,7 +155,11 @@ var App = {
   },
   
   setGeometry: function(index){
-    this.mesh.geometry = App.shapes[index].geo;
+    if(this.mesh.geometry != App.shapes[index].geo){
+      console.log('change');
+      this.mesh.geometry = App.shapes[index].geo;
+    }
+    
   },
   
   onWindowResize: function(){
