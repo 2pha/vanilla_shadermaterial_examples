@@ -26,6 +26,11 @@ var App = {
     //Router.config({mode:'history', root: window.location.pathname});
     Router.config();
     
+    // Order the geometry buttons depending on order property/
+    App.shapes.sort(function(a, b) {
+      return parseFloat(a.order) - parseFloat(b.order);
+    });
+    
     // Add buttons.
     this.addGeoButtons();
     // Add shader select and routes.
