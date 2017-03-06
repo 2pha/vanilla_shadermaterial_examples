@@ -28,7 +28,7 @@ gulp.task('scripts', function() {
 
 gulp.task('styles', function(){
   return gulp.src(sassFile)
-    .pipe(sass().on('error', sass.logError))
+    .pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
     .pipe(gulp.dest(jsDest));
 });
 
