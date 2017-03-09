@@ -4,6 +4,8 @@ $hover-color: #a5a5a5;
 
 $button-size: 50px;
 
+$breakpoint: 600px;
+
 #app-container {
   position: absolute;
   width: 100%;
@@ -23,7 +25,10 @@ $button-size: 50px;
 #tools-container {
   position: absolute;
   top: 0px;
-  width: 100%;
+  @media screen and (min-width: $breakpoint) {
+    width: 100%;
+  }
+
 }
 
 #stats-container {
@@ -31,15 +36,20 @@ $button-size: 50px;
   right: 0px;
   bottom: 0px;
 }
-
+#geo-button-container {
+  display: inline-block;
+}
 .geobutton {
   background-color: $secondary-color;
   background-size: cover;
   width: $button-size;
   height: $button-size;
+  display: inline-block;
 }
 .geobutton:hover {
   background-color: $hover-color;
   cursor: pointer;
 }
-
+#shader-select {
+  display: inline-block;
+}
