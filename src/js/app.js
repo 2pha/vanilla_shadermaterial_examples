@@ -60,6 +60,14 @@ var App = {
   addTools : function(){
     // add flyout button
     var flyoutbutton = document.createElement('div');
+    var flyoutarrow = document.createElement('div');
+    flyoutarrow.id = 'flyout-arrow';
+    flyoutbutton.appendChild(flyoutarrow);
+    flyoutbutton.id ='flyout-button';
+    var app = this;
+    flyoutbutton.addEventListener('click', function(e){
+      app.toolsContainer.classList.toggle('open');
+    });
     this.toolsContainer.appendChild(flyoutbutton);
     this.addGeoButtons();
     this.addShaderCombobox();

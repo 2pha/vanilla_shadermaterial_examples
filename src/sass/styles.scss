@@ -6,6 +6,18 @@ $button-size: 50px;
 
 $breakpoint: 600px;
 
+@mixin toolbar-button() {
+  background-color: $secondary-color;
+  background-size: cover;
+  width: $button-size;
+  height: $button-size;
+  display: inline-block;
+}
+@mixin toolbar-button-hover() {
+  background-color: $hover-color;
+  cursor: pointer;
+}
+
 #app-container {
   position: absolute;
   width: 100%;
@@ -25,10 +37,22 @@ $breakpoint: 600px;
 #tools-container {
   position: absolute;
   top: 0px;
+  /*left: -100%;*/
+  -webkit-transition:
+  -webkit-transform 0.2s;
+  -moz-transition: -moz-transform 0.2s;
+  transition: transform 0.2s;
+  transform: translateX(-100%);
+  height: 100%;
   @media screen and (min-width: $breakpoint) {
     width: 100%;
+    height: auto;
+    transform: translateX(0%);
   }
-
+}
+#tools-container.open {
+  width: auto;
+  transform: translateX(0%);
 }
 
 #stats-container {
@@ -40,16 +64,49 @@ $breakpoint: 600px;
   display: inline-block;
 }
 .geobutton {
+  @include toolbar-button();
+  /*
   background-color: $secondary-color;
   background-size: cover;
   width: $button-size;
   height: $button-size;
   display: inline-block;
+  */
 }
 .geobutton:hover {
-  background-color: $hover-color;
-  cursor: pointer;
+  @include toolbar-button-hover();
 }
 #shader-select {
-  display: inline-block;
+  display: block;
+  @media screen and (min-width: $breakpoint) {
+    display: inline-block;
+  }
 }
+#flyout-button {
+  @include toolbar-button();
+  position: absolute;
+  display: block;
+  width: 50px;
+  height: 50px;
+  right: -50px;
+
+  @media screen and (min-width: $breakpoint) {
+    display: none;
+  }
+}
+#flyout-button:hover {
+  @include toolbar-button-hover();
+ }
+ #flyout-arrow {
+   width: 0;
+   height: 0;
+   border-top: 12px solid transparent;
+   border-bottom: 12px solid transparent;
+   border-left: 21px solid $primary-color;
+   position: relative;
+   margin: auto;
+   margin-top: 12px;
+ }
+ #tools-container.open #flyout-arrow  {
+   transform: rotate(180deg);
+ }
