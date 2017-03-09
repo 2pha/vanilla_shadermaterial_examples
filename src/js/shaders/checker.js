@@ -1,31 +1,31 @@
 App.shaders.push(
   {
-    name: "Checker",
-    path: "!checker",
+    name: 'Checker',
+    path: '!checker',
     uniforms: {
-      "color1": {
-        type: "c",
+      'color1': {
+        type: 'c',
         value : new THREE.Color(0xffffff)
       },
-      "color2" : {
-        type : "c",
+      'color2' : {
+        type : 'c',
         value : new THREE.Color(0x000000)
       },
-      "scale" : {
-        type : "f",
+      'scale' : {
+        type : 'f',
         value : 5,
         min : 1, // only used for gui, not needed for production
         max : 100 // only used for gui, not needed for production
       },
     },
-    vertexShader: "\
+    vertexShader: '\
 varying vec2 vUv;\
 void main() {\
   vUv = uv;\
   gl_Position = projectionMatrix * modelViewMatrix * vec4(position,1.0);\
 }\
-    ",
-    fragmentShader: "\
+    ',
+    fragmentShader: '\
 uniform vec3 color1;\
 uniform vec3 color2;\
 uniform float scale;\
@@ -39,6 +39,6 @@ void main() {\
     gl_FragColor = vec4(color2, 1.0);\
   }\
 }\
-    "
+    '
   }
 );

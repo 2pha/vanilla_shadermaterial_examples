@@ -1,24 +1,24 @@
 App.shaders.push(
   {
-    name: "Matrix",
+    name: 'Matrix',
     path : '!matrix',
     uniforms: {
-      colour: { type: "c", value: new THREE.Color(0x89ff89) },
-      rows: { type: "f", value: 15},
-      glow: { type: "f", value: 1.0},
-      glowRadius: { type: "f", value: 1.0},
-      charDetail: { type: "f", value: 3.0},
-      speed: { type: "f", value: 10.0},
-      iGlobalTime: { type: "f", value: App.clock.getDelta(), hidden: 1}
+      colour: { type: 'c', value: new THREE.Color(0x89ff89) },
+      rows: { type: 'f', value: 15},
+      glow: { type: 'f', value: 1.0},
+      glowRadius: { type: 'f', value: 1.0},
+      charDetail: { type: 'f', value: 3.0},
+      speed: { type: 'f', value: 10.0},
+      iGlobalTime: { type: 'f', value: App.clock.getDelta(), hidden: 1}
     },
-    vertexShader: "\
+    vertexShader: '\
 varying vec2 vUv;\
 void main() {\
   vUv = uv;\
   gl_Position = projectionMatrix * modelViewMatrix * vec4(position,1.0);\
 }\
-    ",
-    fragmentShader: "\
+    ',
+    fragmentShader: '\
 \
 uniform vec3 colour;\
 uniform float rows;\
@@ -62,7 +62,7 @@ vec3 matrix(in vec2 st){\
 void main() {\
     gl_FragColor = vec4(matrix(vUv),1.0);\
 }\
-    ",
+    ',
     update: function(){
       this.uniforms.iGlobalTime.value = App.clock.getElapsedTime();
     }

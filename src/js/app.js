@@ -39,7 +39,7 @@ var App = {
     // set up toolbar
     this.addTools();
     // Add shader select and routes.
-    this.addShaderCombobox();
+    //this.addShaderCombobox();
     // setup canvas
     this.createCanvas();
 
@@ -57,18 +57,19 @@ var App = {
     this.animate();
   },
 
-  addTools(){
+  addTools : function(){
     // add flyout button
-    var flyoutbutton = document.createElement("div");
+    var flyoutbutton = document.createElement('div');
     this.toolsContainer.appendChild(flyoutbutton);
-    this.addButtons();
+    this.addGeoButtons();
+    this.addShaderCombobox();
   },
 
   addGeoButtons : function(){
-    var geoButtonContainer = document.createElement("div");
+    var geoButtonContainer = document.createElement('div');
     geoButtonContainer.id = 'geo-button-container';
     this.shapes.forEach(function(shape, index){
-      var button = document.createElement("div");
+      var button = document.createElement('div');
       button.className += 'geobutton';
       button.id += 'goebutton-'+shape.name.toLowerCase();;
       button.title = shape.name;
@@ -81,16 +82,14 @@ var App = {
   },
 
   addShaderCombobox : function(){
-    var shaderSelect = document.createElement("select");
+    var shaderSelect = document.createElement('select');
     shaderSelect.id = 'shader-select';
-    //var app = this
     App.shaders.forEach(function(shader, index){
-
-      var option = document.createElement("option");
+      var option = document.createElement('option');
       option.value = index;
       option.innerHTML = shader.name;
       shaderSelect.appendChild(option);
-      Router.add(shader.path, function(){App.shaderIndex = index});
+      Router.add(shader.path, function(){App.shaderIndex = index;});
 
       //if(index == 0){
       //  Router.frontFunc = app.changeShader(index);
@@ -179,15 +178,15 @@ var App = {
     var shaderObject = {
       vertexShader: App.shaders[index].vertexShader,
       fragmentShader: App.shaders[index].fragmentShader,
-    }
+    };
     if('uniforms' in App.shaders[index]){
       shaderObject.uniforms = App.shaders[index].uniforms;
-    }
+    };
 
     this.material= new THREE.ShaderMaterial(shaderObject);
     if(this.mesh != null){
       this.mesh.material = this.material;
-    }
+    };
   },
 
   setGeometry: function(index){
@@ -211,10 +210,10 @@ var App = {
 
 //Add to PointLight pprototype so we can see where lights are and their color.
 THREE.PointLight.prototype.addSphere = function(){
-  this.sphere = new THREE.Mesh( new THREE.SphereGeometry( 2, 16, 16 ), new THREE.MeshBasicMaterial( { color: this.color } ) )
+  this.sphere = new THREE.Mesh( new THREE.SphereGeometry( 2, 16, 16 ), new THREE.MeshBasicMaterial({color: this.color}));
   this.add(this.sphere);
-}
+};
 THREE.PointLight.prototype.changeColor = function(value){
   this.color.setRGB(value[0]/255, value[1]/255, value[2]/255);
   this.sphere.material.color.setRGB(value[0]/255, value[1]/255, value[2]/255);
-}
+};

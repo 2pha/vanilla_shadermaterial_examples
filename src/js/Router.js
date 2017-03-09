@@ -4,8 +4,7 @@ var Router = {
     root: '/',
     //frontFunc: null,
     config: function(options) {
-      this.mode = options && options.mode && options.mode == 'history' 
-        && !!(history.pushState) ? 'history' : 'hash';
+      this.mode = options && options.mode && options.mode == 'history' && !!(history.pushState) ? 'history' : 'hash';
       this.root = options && options.root ? '/' + this.clearSlashes(options.root) + '/' : '/';
       return this;
     },
@@ -35,7 +34,7 @@ var Router = {
     remove: function(param) {
       for(var i=0, r; i<this.routes.length, r = this.routes[i]; i++) {
         if(r.handler === param || r.re.toString() === param.toString()) {
-          this.routes.splice(i, 1); 
+          this.routes.splice(i, 1);
           return this;
         }
       }
@@ -58,7 +57,7 @@ var Router = {
           match.shift();
           this.routes[i].handler.apply({}, match);
           return this;
-        }           
+        }
       }
       return this;
     },
@@ -70,7 +69,7 @@ var Router = {
           current = self.getFragment();
           self.check(current);
         }
-      }
+      };
       clearInterval(this.interval);
       this.interval = setInterval(fn, 50);
       return this;
@@ -84,4 +83,4 @@ var Router = {
       }
       return this;
     }
-}
+};

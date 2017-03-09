@@ -7,15 +7,17 @@ var htmlclean = require('gulp-htmlclean');
 var sass = require('gulp-sass');
 var imagemin = require('gulp-imagemin');
 var pngquant = require('imagemin-pngquant');
+var eslint = require('gulp-eslint');
 
 //script paths
-var jsFiles = ['src/js/three.js',
-               'src/js/stats.js',
+var jsLintFiles = ['src/js/stats.js',
                'src/js/Router.js',
                'src/js/app.js',
-               'src/js/shapes/*.js',
-               'src/js/shaders/*.js'],
+               'src/js/shapes/*.js', 'src/js/shaders/*.js'],
     jsDest = 'build';
+var jsFiles = jsLintFiles.slice(0);
+jsFiles.unshift('src/js/three.js');
+//jsFiles.push('src/js/shaders/*.js');
 
 var sassFile = 'src/sass/styles.scss',
     cssDest = 'build';
@@ -27,7 +29,7 @@ gulp.task('scripts', function() {
   console.log('doing scripts');
   return gulp.src(jsFiles)
     .pipe(concat('script.js'))
-    .pipe(uglify().on('error', console.log))
+    //.pipe(uglify().on('error', console.log))
     .pipe(gulp.dest(jsDest));
 });
 
@@ -51,4 +53,16 @@ gulp.task('index', function(){
     .pipe(gulp.dest('build'));
 });
 
-gulp.task('default', ['index', 'styles', 'scripts', 'buttonImages']);
+gulp.task('lint', function() {
+  return gulp.src(jsLintFiles).pipe(eslint({
+    'rules':{
+        'quotes': [1, 'single'],
+        'semi': [1, 'always']
+    }
+  }))
+  .pipe(eslint.format())
+  // Brick on failure to be super strict
+  .pipe(eslint.failOnError());
+});
+
+gulp.task('default', ['lint', 'index', 'styles', 'scripts', 'buttonImages']);

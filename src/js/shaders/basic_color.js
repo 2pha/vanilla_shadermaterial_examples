@@ -1,22 +1,22 @@
 App.shaders.push(
   {
-    name: "Basic color",
+    name: 'Basic color',
     path : '!basic-color',
     uniforms: {
-      diffuse: { type: "c", value: new THREE.Color(0xff0000) }
+      diffuse: { type: 'c', value: new THREE.Color(0xff0000) }
     },
-    vertexShader: "\
+    vertexShader: '\
 varying vec2 vUv;\
 void main() {\
   vUv = uv;\
   gl_Position = projectionMatrix * modelViewMatrix * vec4(position,1.0);\
 }\
-    ",
-    fragmentShader: "\
+    ',
+    fragmentShader: '\
 uniform vec3 diffuse;\
 void main() {\
   gl_FragColor = vec4(diffuse.x, diffuse.y, diffuse.z, 1.0);\
 }\
-    "
+    '
   }
 );

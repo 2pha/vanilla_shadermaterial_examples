@@ -1,35 +1,35 @@
 App.shaders.push(
   {
-    name: "Voronoise",
-    path: "!voronoise",
+    name: 'Voronoise',
+    path: '!voronoise',
     uniforms: {
-      "amount": {
-        type: "f",
+      'amount': {
+        type: 'f',
         value: 24,
         min: 0,
         max: 100
       },
-      "jitter": {
-        type: "f",
+      'jitter': {
+        type: 'f',
         value: 1,
         min: 0, // only used for dat.gui, not needed for production
         max: 1 // only used for dat.gui, not needed for production
       },
-      "blur": {
-        type: "f",
+      'blur': {
+        type: 'f',
         value: 1,
         min: 0, // only used for dat.gui, not needed for production
         max: 1 // only used for dat.gui, not needed for production
       }
     },
-    vertexShader: "\
+    vertexShader: '\
 varying vec2 vUv;\
 void main() {\
   vUv = uv;\
   gl_Position = projectionMatrix * modelViewMatrix * vec4(position,1.0);\
 }\
-    ",
-    fragmentShader: "\
+    ',
+    fragmentShader: '\
     varying vec2 vUv;\
     uniform float amount;\
     uniform float jitter;\
@@ -78,6 +78,6 @@ void main() {\
       \
       gl_FragColor = vec4( f, f, f, 1.0 );\
     }\
-    "
+    '
   }
 );
