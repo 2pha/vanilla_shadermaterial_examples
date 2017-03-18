@@ -24,6 +24,12 @@ varying vec3 vNormal;\
 struct PointLight {\
   vec3 position;\
   vec3 color;\
+  float distance;\
+  float decay;\
+  int shadow;\
+  float shadowBias;\
+  float shadowRadius;\
+  vec2 shadowMapSize;\
 };\
 uniform PointLight pointLights[ NUM_POINT_LIGHTS ];\
 \
