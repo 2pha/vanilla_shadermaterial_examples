@@ -43534,11 +43534,10 @@ var Router = {
       //  this.frontFunc();
       //}
       for(var i=0; i<this.routes.length; i++) {
-        var match = fragment.match(this.routes[i].re);
+        //var match = fragment.match(this.routes[i].re);
         //if(match) {
         if(fragment === this.routes[i].re) {
-          console.log(fragment);
-          console.log(match);
+          var match = fragment.match(this.routes[i].re);
           match.shift();
           this.routes[i].handler.apply({}, match);
           return this;
