@@ -63,8 +63,10 @@ void main() {\
     gl_FragColor = vec4(matrix(vUv),1.0);\
 }\
     ',
-    update: function(){
-      this.uniforms.iGlobalTime.value = App.clock.getElapsedTime();
+    update: function(uniforms){
+      // Uniforms are passed in, because when a shader is created and the UniformUtils.merge function is called,
+      // the uniforms in this object are cloned.
+      uniforms.iGlobalTime.value = App.clock.getElapsedTime();
     }
   }
 

@@ -167,7 +167,7 @@ var App = {
     this.mesh.rotation.y += 0.01;
 
     if('material' in this && 'update' in this.shaders[this.shaderIndex]){
-      this.shaders[this.shaderIndex].update();
+      this.shaders[this.shaderIndex].update(this.material.uniforms);
     }
     this.render();
     this.stats.end();
@@ -190,8 +190,7 @@ var App = {
     };
     
     if('uniforms' in App.shaders[index]){
-      //shaderObject.uniforms = App.shaders[index].uniforms;
-
+      // Using UniormUtils will clone the shader files uniforms,
       shaderObject.uniforms = THREE.UniformsUtils.merge([
           THREE.UniformsLib['lights'],
           App.shaders[index].uniforms
