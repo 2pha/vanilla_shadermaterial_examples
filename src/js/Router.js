@@ -53,7 +53,10 @@ var Router = {
       //}
       for(var i=0; i<this.routes.length; i++) {
         var match = fragment.match(this.routes[i].re);
-        if(match) {
+        //if(match) {
+        if(fragment === this.routes[i].re) {
+          console.log(fragment);
+          console.log(match);
           match.shift();
           this.routes[i].handler.apply({}, match);
           return this;
