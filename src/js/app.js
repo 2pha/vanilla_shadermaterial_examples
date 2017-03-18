@@ -186,9 +186,17 @@ var App = {
     var shaderObject = {
       vertexShader: App.shaders[index].vertexShader,
       fragmentShader: App.shaders[index].fragmentShader,
+      lights: true,
     };
+    
     if('uniforms' in App.shaders[index]){
-      shaderObject.uniforms = App.shaders[index].uniforms;
+      //shaderObject.uniforms = App.shaders[index].uniforms;
+
+      shaderObject.uniforms = THREE.UniformsUtils.merge([
+          THREE.UniformsLib['lights'],
+          App.shaders[index].uniforms
+      ]);
+
     };
 
     this.material= new THREE.ShaderMaterial(shaderObject);
