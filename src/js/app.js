@@ -22,31 +22,33 @@ var App = {
     this._shaderIndex = value;
     this.setShader(this._shaderIndex);
   },
+
   stats: new Stats(),
   clock: new THREE.Clock(1),
+
   init : function(){
-    // Config router.
-    //Router.config({mode:'history', root: window.location.pathname});
-    Router.config();
 
     // Order the geometry buttons depending on order property/
     App.shapes.sort(function(a, b) {
       return parseFloat(a.order) - parseFloat(b.order);
     });
 
-    // Add buttons.
-    //this.addGeoButtons();
     // set up toolbar
     this.addTools();
-    // Add shader select and routes.
-    //this.addShaderCombobox();
     // setup canvas
     this.createCanvas();
-
+    // Add the cube
+    this.addMesh();
+    // set initial shader
+    if(!this.material){
+      this.setShader(0);
+    }
+    
+    //Router.config({mode:'history', root: window.location.pathname});
+    Router.config();
 
     // add stats
     document.getElementById('stats-container').appendChild( this.stats.dom );
-
 
     // Add listener for window resize.
     window.addEventListener('resize', this.onWindowResize.bind(this), false);
@@ -98,11 +100,6 @@ var App = {
       option.innerHTML = shader.name;
       shaderSelect.appendChild(option);
       Router.add(shader.path, function(){App.shaderIndex = index;});
-
-      //if(index == 0){
-      //  Router.frontFunc = app.changeShader(index);
-      //}
-
     });
 
     shaderSelect.addEventListener('change', function(e){
@@ -115,8 +112,6 @@ var App = {
 
   createCanvas : function(){
     var size = this.canvasContainer.getBoundingClientRect();
-    //var width = this.canvasContainer.offsetHeight;
-    //var height = this.canvasContainer.offsetWidth;
 
     this.renderer = new THREE.WebGLRenderer({antialias: true});
     this.renderer.setSize(size.width, size.height);
@@ -126,19 +121,12 @@ var App = {
     this.camera.position.z = 400;
 
     this.scene = new THREE.Scene();
-
-    //this.material = new THREE.MeshBasicMaterial();
-
- // Create cube and add to scene.
-    //var geometry = new THREE.BoxGeometry(200, 200, 200);
-    this.mesh = new THREE.Mesh(this.shapes[0].geo, this.material);
-    this.scene.add(this.mesh);
-
- // Create ambient light and add to scene.
+    
+    // Create ambient light and add to scene.
     var light = new THREE.AmbientLight(0x404040); // soft white light
     this.scene.add(light);
 
- // Create directional light and add to scene.
+    // Create directional light and add to scene.
     var directionalLight = new THREE.DirectionalLight(0xffffff);
     directionalLight.position.set(1, 1, 1).normalize();
     this.scene.add(directionalLight);
@@ -152,6 +140,12 @@ var App = {
     this.light2.position.set( 0,250, 0 );
     this.scene.add(this.light2);
 
+  },
+
+  addMesh: function() {
+    // Create cube and add to scene.
+    this.mesh = new THREE.Mesh(this.shapes[0].geo, this.material);
+    this.scene.add(this.mesh);
   },
 
   animate: function(){
@@ -188,7 +182,7 @@ var App = {
       fragmentShader: App.shaders[index].fragmentShader,
       lights: true,
     };
-    
+
     if('uniforms' in App.shaders[index]){
       // Using UniormUtils will clone the shader files uniforms,
       shaderObject.uniforms = THREE.UniformsUtils.merge([
@@ -198,7 +192,7 @@ var App = {
 
     };
 
-    this.material= new THREE.ShaderMaterial(shaderObject);
+    this.material = new THREE.ShaderMaterial(shaderObject);
     if(this.mesh != null){
       this.mesh.material = this.material;
     };
@@ -208,7 +202,6 @@ var App = {
     if(this.mesh.geometry != App.shapes[index].geo){
       this.mesh.geometry = App.shapes[index].geo;
     }
-
   },
 
   onWindowResize: function(){
