@@ -71,6 +71,7 @@ var App = {
       app.toolsContainer.classList.toggle('open');
     });
     this.toolsContainer.appendChild(flyoutbutton);
+    this.addLightControls();
     this.addGeoButtons();
     this.addShaderCombobox();
   },
@@ -121,6 +122,18 @@ var App = {
     shaderSelectContainer.appendChild(shaderSelect);
     this.toolsContainer.appendChild(shaderSelectContainer);
     Router.check().listen();
+  },
+
+  addLightControls: function(){
+    var light1Container = document.createElement('div');
+    var label = document.createElement('div');
+    label.innerHTML = 'Light 1';
+    label.className = 'label';
+    light1Container.appendChild(label);
+    light1Container.id = 'light1-container';
+    light1Container.className = 'tool-group-container';
+    
+    this.toolsContainer.appendChild(light1Container);
   },
 
   createCanvas : function(){
