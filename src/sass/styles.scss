@@ -65,6 +65,14 @@ $breakpoint: 600px;
 #tools-container.open {
   width: auto;
   transform: translateX(0%);
+  @media screen and (min-width: $breakpoint) {
+    width: 100%;
+    height: auto;
+    transform: translateX(0%);
+  }
+}
+.tool-group-container {
+  padding: 5px 5px 0 5px;
 }
 
 #stats-container {

@@ -82,6 +82,7 @@ var App = {
     label.className = 'label';
     geoButtonContainer.appendChild(label);
     geoButtonContainer.id = 'geo-button-container';
+    geoButtonContainer.className = 'tool-group-container';
     this.shapes.forEach(function(shape, index){
       var button = document.createElement('div');
       button.className += 'geobutton';
@@ -101,6 +102,8 @@ var App = {
     label.innerHTML = 'Shader';
     label.className = 'label';
     shaderSelectContainer.appendChild(label);
+    shaderSelectContainer.id = 'shader-select-container';
+    shaderSelectContainer.className = 'tool-group-container';
     var shaderSelect = document.createElement('select');
     shaderSelect.id = 'shader-select';
     App.shaders.forEach(function(shader, index){
