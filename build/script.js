@@ -43648,6 +43648,10 @@ var App = {
 
   addGeoButtons : function(){
     var geoButtonContainer = document.createElement('div');
+    var label = document.createElement('div');
+    label.innerHTML = 'Geometry';
+    label.className = 'label';
+    geoButtonContainer.appendChild(label);
     geoButtonContainer.id = 'geo-button-container';
     this.shapes.forEach(function(shape, index){
       var button = document.createElement('div');
@@ -43663,6 +43667,11 @@ var App = {
   },
 
   addShaderCombobox : function(){
+    var shaderSelectContainer = document.createElement('div');
+    var label = document.createElement('div');
+    label.innerHTML = 'Shader';
+    label.className = 'label';
+    shaderSelectContainer.appendChild(label);
     var shaderSelect = document.createElement('select');
     shaderSelect.id = 'shader-select';
     App.shaders.forEach(function(shader, index){
@@ -43677,7 +43686,8 @@ var App = {
       Router.navigate(App.shaders[shaderSelect.value].path);
     });
 
-    this.toolsContainer.appendChild(shaderSelect);
+    shaderSelectContainer.appendChild(shaderSelect);
+    this.toolsContainer.appendChild(shaderSelectContainer);
     Router.check().listen();
   },
 

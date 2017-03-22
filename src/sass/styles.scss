@@ -1,23 +1,34 @@
-$primary-color: #000;
-$secondary-color: #777;
+$color-one: #000;
+$color-two: #555;
+$color-three: #888;
 $hover-color: #a5a5a5;
 
-$button-size: 50px;
+$button-size: 40px;
+$button-margin: 2px;
 
 $breakpoint: 600px;
 
-@mixin toolbar-button() {
-  background-color: $secondary-color;
-  background-size: cover;
+@mixin button-placement() {
+  background-size: 90%;
+  background-repeat: no-repeat;
+  background-position: center;
   width: $button-size;
   height: $button-size;
   display: inline-block;
+}
+
+@mixin toolbar-button() {
+  background-color: $color-three;
+  border-radius: 5px 5px 5px 5px;
+  -moz-border-radius: 5px 5px 5px 5px;
+  -webkit-border-radius: 5px 5px 5px 5px;
+  border: 1px solid $color-one;
+  margin: $button-margin;
 }
 @mixin toolbar-button-hover() {
   background-color: $hover-color;
   cursor: pointer;
 }
-
 #app-container {
   position: absolute;
   width: 100%;
@@ -27,7 +38,7 @@ $breakpoint: 600px;
 }
 
 #canvas-container {
-  background-color: $primary-color;
+  background-color: $color-one;
   position: absolute;
   width: 100%;
   height: 100%;
@@ -44,6 +55,7 @@ $breakpoint: 600px;
   transition: transform 0.2s;
   transform: translateX(-100%);
   height: 100%;
+  background-color: $color-two;
   @media screen and (min-width: $breakpoint) {
     width: 100%;
     height: auto;
@@ -64,9 +76,10 @@ $breakpoint: 600px;
   display: inline-block;
 }
 .geobutton {
+  @include button-placement();
   @include toolbar-button();
   /*
-  background-color: $secondary-color;
+  background-color: $color-two;
   background-size: cover;
   width: $button-size;
   height: $button-size;
@@ -83,7 +96,8 @@ $breakpoint: 600px;
   }
 }
 #flyout-button {
-  @include toolbar-button();
+  @include button-placement();
+  background-color: $color-two;
   position: absolute;
   display: block;
   width: 50px;
@@ -102,7 +116,7 @@ $breakpoint: 600px;
    height: 0;
    border-top: 12px solid transparent;
    border-bottom: 12px solid transparent;
-   border-left: 21px solid $primary-color;
+   border-left: 21px solid $color-one;
    position: relative;
    margin: auto;
    margin-top: 12px;
